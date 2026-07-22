@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
-import Dashboard from "../pages/dashboard/Dashboard";
 
-import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "../pages/dashboard/Dashboard";
+import Employees from "../pages/dashboard/Employees";
+
+import DashboardLayout from "../components/layouts/DashboardLayout";
 
 function AppRoutes() {
 
@@ -14,29 +16,23 @@ function AppRoutes() {
 
             <Routes>
 
-                <Route
-                    path="/"
-                    element={<Navigate to="/login" replace />}
-                />
+                <Route path="/" element={<Login />} />
 
-                <Route
-                    path="/login"
-                    element={<Login />}
-                />
+                <Route path="/register" element={<Register />} />
 
-                <Route
-                    path="/register"
-                    element={<Register />}
-                />
+                <Route element={<DashboardLayout />}>
 
-                <Route
-                    path="/dashboard"
-                    element={
-                        <ProtectedRoute>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    }
-                />
+                    <Route
+                        path="/dashboard"
+                        element={<Dashboard />}
+                    />
+
+                    <Route
+                        path="/employees"
+                        element={<Employees />}
+                    />
+
+                </Route>
 
             </Routes>
 
